@@ -1,6 +1,10 @@
 import express from "express";
+
+// to load any variables present in .env files
+import dotenv from "dotenv";
+dotenv.config();
+
 const app = express();
-const PORT = 8080;
 
 // Loading express.json() into app
 // express.json() is used to convert json into valid JavaScript Object
@@ -179,6 +183,8 @@ app.put("/todos/:id", (req, res) => {
   });
   console.log(TODO_ITEMS[index]);
 });
+
+const PORT = process.env.PORT || 5003;
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);

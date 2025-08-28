@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 // to load any variables present in .env files
 import dotenv from "dotenv";
@@ -9,6 +10,8 @@ const app = express();
 // Loading express.json() into app
 // express.json() is used to convert json into valid JavaScript Object
 app.use(express.json());
+
+app.use(cors());
 
 const TODO_ITEMS = [
   {

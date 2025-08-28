@@ -1,0 +1,185 @@
+import express from "express";
+const app = express();
+const PORT = 8080;
+
+// Loading express.json() into app
+// express.json() is used to convert json into valid JavaScript Object
+app.use(express.json());
+
+const TODO_ITEMS = [
+  {
+    id: 1,
+    todo: "Wake up at 06:00am",
+    priority: "high",
+    isDone: "false",
+    createdAt: "2025-06-10T10:20:30Z",
+  },
+  {
+    id: 2,
+    todo: "Study whole Day",
+    priority: "high",
+    isDone: "false",
+    createdAt: "2025-07-10T10:20:30Z",
+  },
+  {
+    id: 3,
+    todo: "Dinner",
+    priority: "medium",
+    isDone: "false",
+    createdAt: "2025-05-10T10:20:30Z",
+  },
+];
+
+// To get all the Items
+app.get("/todos", (req, res) => {
+  res.json({
+    success: true,
+    data: TODO_ITEMS,
+    message: "Data fetched successfullly",
+  });
+});
+
+app.post("/todos", (req, res) => {
+  const { todo, priority, isDone } = req.body;
+  const newToDo = {
+    id: TODO_ITEMS[TODO_ITEMS.length - 1].id + 1,
+    todo: todo,
+    priority: priority,
+    isDone: isDone,
+    createdAt: new Date().toISOString(),
+  };
+
+  TODO_ITEMS.push(newToDo);
+
+  res.json({
+    success: true,
+    data: TODO_ITEMS,
+    message: "Data fetched successfullly",
+  });
+});
+
+// To search items by name and priority
+// as :id is dynamic, we have to write search method before :id
+app.get("/todos/search", (req, res) => {
+  const { todo, priority } = req.query;
+  const filteredItem = TODO_ITEMS.filter((itemObj) => {
+    return (
+      itemObj.todo.toLowerCase().includes(todo) &&
+      itemObj.priority.toLowerCase() === priority.toLowerCase()
+    );
+  });
+  console.log(filteredItem);
+
+  // .filter() always returns an array
+  // array is always truthy even if it is empty []
+  // compare it  with length
+
+  if (filteredItem.length > 0) {
+    res.json({
+      success: true,
+      data: filteredItem,
+      message: "Data fetched successfully",
+    });
+  } else {
+    res.json({
+      success: false,
+      message: "Item not found",
+    });
+  }
+});
+
+// To get only one Item by id
+// : make id dynamic
+app.get("/todos/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  const data = TODO_ITEMS.find((itemObj) => Number(itemObj.id) === Number(id));
+  console.log(data);
+  if (data) {
+    res.json({
+      success: true,
+      data: data,
+      message: "Item fetched successfullly",
+    });
+  } else {
+    res.json({
+      success: false,
+      message: "Data not found",
+    });
+  }
+});
+
+// To delete only one Item at specific index with the help of id
+app.delete("/todos/:id", (req, res) => {
+  const { id } = req.params;
+  const index = TODO_ITEMS.findIndex((itemObj) => {
+    return Number(itemObj.id) === Number(id);
+  });
+  if (index === -1) {
+    res.json({
+      success: false,
+      message: "Data not found",
+    });
+  } else {
+    TODO_ITEMS.splice(index, 1);
+    res.json({ success: true, message: "Item deleted successfully" });
+  }
+});
+
+app.patch("/todos/:id/status", (req, res) => {
+  const { id } = req.params;
+  const { isDone } = req.body;
+
+  const index = TODO_ITEMS.findIndex((itemObj) => {
+    return Number(itemObj.id) === Number(id);
+  });
+  if (index === -1) {
+    return res.json({
+      success: false,
+      message: "Item not found",
+    });
+  }
+  TODO_ITEMS[index].isDone = isDone;
+  res.json({
+    success: true,
+    message: "Item not found",
+    data: TODO_ITEMS[index],
+  });
+});
+
+app.put("/todos/:id", (req, res) => {
+  const { id } = req.params;
+
+  const index = TODO_ITEMS.findIndex((itemObj) => {
+    return Number(itemObj.id) === Number(id);
+  });
+
+  if (index === -1) {
+    return res.json({
+      success: false,
+      message: "Item not found",
+    });
+  }
+
+  const { todo, isDone, priority } = req.body;
+
+  const newObj = {
+    todo: todo,
+    isDone: isDone,
+    priority: priority,
+    id: TODO_ITEMS[index].id,
+    createdAt: TODO_ITEMS[index].createdAt,
+  };
+  TODO_ITEMS[index] = newObj;
+
+  res.json({
+    success: true,
+    data: TODO_ITEMS[index],
+    message: "Item updated successfully",
+  });
+  console.log(TODO_ITEMS[index]);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on PORT ${PORT}`);
+});

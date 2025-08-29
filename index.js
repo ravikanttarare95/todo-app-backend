@@ -16,7 +16,7 @@ app.use(cors());
 const TODO_ITEMS = [
   {
     id: 1,
-    emogy: "🏋️",
+    emoji: "🏋️",
     todo: "Gym Workout",
     priority: "high",
     isDone: false,
@@ -24,7 +24,7 @@ const TODO_ITEMS = [
   },
   {
     id: 2,
-    emogy: "🧘",
+    emoji: "🧘",
     todo: "Meditation for 20 mins",
     priority: "medium",
     isDone: false,
@@ -32,7 +32,7 @@ const TODO_ITEMS = [
   },
   {
     id: 3,
-    emogy: "☕",
+    emoji: "☕",
     todo: "Morning Coffee",
     priority: "low",
     isDone: false,

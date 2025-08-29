@@ -16,6 +16,7 @@ app.use(cors());
 const TODO_ITEMS = [
   {
     id: 1,
+    emogy: "🌞",
     todo: "Wake up at 06:00am",
     priority: "high",
     isDone: false,
@@ -23,6 +24,7 @@ const TODO_ITEMS = [
   },
   {
     id: 2,
+    emogy: "📚",
     todo: "Study whole Day",
     priority: "high",
     isDone: false,
@@ -30,6 +32,7 @@ const TODO_ITEMS = [
   },
   {
     id: 3,
+    emogy: "🍽️",
     todo: "Dinner",
     priority: "medium",
     isDone: false,

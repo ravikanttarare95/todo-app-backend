@@ -16,27 +16,27 @@ app.use(cors());
 const TODO_ITEMS = [
   {
     id: 1,
-    emogy: "🌞",
-    todo: "Wake up at 06:00am",
+    emogy: "🏋️",
+    todo: "Gym Workout",
     priority: "high",
     isDone: false,
-    createdAt: "2025-06-10T10:20:30Z",
+    createdAt: "2025-08-20T07:00:00Z",
   },
   {
     id: 2,
-    emogy: "📚",
-    todo: "Study whole Day",
-    priority: "high",
+    emogy: "🧘",
+    todo: "Meditation for 20 mins",
+    priority: "medium",
     isDone: false,
-    createdAt: "2025-07-10T10:20:30Z",
+    createdAt: "2025-08-21T06:30:00Z",
   },
   {
     id: 3,
-    emogy: "🍽️",
-    todo: "Dinner",
-    priority: "medium",
+    emogy: "☕",
+    todo: "Morning Coffee",
+    priority: "low",
     isDone: false,
-    createdAt: "2025-05-10T10:20:30Z",
+    createdAt: "2025-08-22T08:15:00Z",
   },
 ];
 

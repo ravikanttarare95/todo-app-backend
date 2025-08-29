@@ -57,13 +57,14 @@ app.get("/todos", (req, res) => {
 });
 
 app.post("/todos", (req, res) => {
-  const { todo, priority, isDone } = req.body;
+  const { todo, priority, isDone, emoji } = req.body;
   const newToDo = {
     id: TODO_ITEMS[TODO_ITEMS.length - 1].id + 1,
     todo: todo,
     priority: priority,
     isDone: isDone,
     createdAt: new Date().toISOString(),
+    emoji: emoji,
   };
 
   TODO_ITEMS.push(newToDo);

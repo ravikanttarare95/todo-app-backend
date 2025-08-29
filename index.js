@@ -72,7 +72,7 @@ app.post("/todos", (req, res) => {
   res.json({
     success: true,
     data: TODO_ITEMS,
-    message: "Data fetched successfullly",
+    message: "Data added successfullly",
   });
 });
 

@@ -179,12 +179,13 @@ app.put("/todos/:id", (req, res) => {
     });
   }
 
-  const { todo, isDone, priority } = req.body;
+  const { todo, isDone, priority, emoji } = req.body;
 
   const newObj = {
     todo: todo,
     isDone: isDone,
     priority: priority,
+    emoji: emoji,
     id: TODO_ITEMS[index].id,
     createdAt: TODO_ITEMS[index].createdAt,
   };
@@ -195,7 +196,6 @@ app.put("/todos/:id", (req, res) => {
     data: TODO_ITEMS[index],
     message: "Item updated successfully",
   });
-  console.log(TODO_ITEMS[index]);
 });
 
 const PORT = process.env.PORT || 5003;

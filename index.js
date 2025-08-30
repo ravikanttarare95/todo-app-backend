@@ -160,7 +160,7 @@ app.patch("/todos/:id/status", (req, res) => {
   TODO_ITEMS[index].isDone = isDone;
   res.json({
     success: true,
-    message: "Item not found",
+    message: "Item updated successfully",
     data: TODO_ITEMS[index],
   });
 });

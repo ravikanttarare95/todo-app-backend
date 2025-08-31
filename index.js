@@ -57,9 +57,9 @@ app.get("/todos", (req, res) => {
 });
 
 app.post("/todos", (req, res) => {
-  const { todo, priority, isDone, emoji } = req.body;
+  const { todo, priority, isDone, emoji } = req.body; 
   const newToDo = {
-    id: TODO_ITEMS[TODO_ITEMS.length - 1].id + 1,
+    id: TODO_ITEMS.length > 0 ? TODO_ITEMS[TODO_ITEMS.length - 1].id + 1 : 1,
     todo: todo,
     priority: priority,
     isDone: isDone,
